@@ -3,16 +3,21 @@
 # installation file to get blog up and running on home server
 
 # install basic dependencies
+
+echo "INSTALLING DOCKER"
 apt-get remove -y docker docker-engine docker.io
 apt-get install -y —no-install-recommends \  
     apt-transport-https \  
     ca-certificates \  
     curl \  
     software-properties-common
-curl -fsSL [https://download.docker.com/linux/ubuntu/gpg](https://download.docker.com/linux/ubuntu/gpg) | apt-key add —
-add-apt-repository "deb \[arch=amd64\] [https://download.docker.com/linux/ubuntu](https://download.docker.com/linux/ubuntu) $(lsb_release -cs) stable"
-apt-get updateapt-get install -y docker-ceusermod -aG docker $(id -u -n)
-
+apt-get install -y apt-transport-https ca-certificates gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+ echo \
+  "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+apt-get update -y
+apt-get install -y docker-ce docker-ce-cli containerd.io
 # make
 apt-get -y install build-essential
 apt-get -y install make
@@ -41,3 +46,6 @@ docker-compose up -d
 
 # pull down the github repo (requires you to enter your credentials)
 git clone https://github.com/BerenMillidge/BerenMillidge.github.io
+
+# then update to run
+bash ./update_site.sh
