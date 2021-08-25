@@ -1,12 +1,11 @@
 JEKYLL := 3.8.6  
-DEPLOY_DIR := ../docker-data/nginx/site.PHONY: clean  
-
+DEPLOY_DIR := ../docker-data/nginx/site.PHONY: clean
 clean:  
-    rm -rf _site  
-    rm -rf .jekyll-cache.PHONY: build  
+	rm -rf _site  
+	rm -rf .jekyll-cache.PHONY: build  
 
 build:  
-    docker run --rm \  
+	docker run --rm \  
         -v "${PWD}:/srv/jekyll" \  
         -v "${PWD}/vendor/bundle:/usr/local/bundle" \  
         jekyll/jekyll:${JEKYLL} \  
