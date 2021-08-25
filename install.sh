@@ -5,12 +5,13 @@
 # install basic dependencies
 
 echo "INSTALLING DOCKER"
+apt-get update
 apt-get remove -y docker docker-engine docker.io
 apt-get install -y —no-install-recommends \  
     apt-transport-https \  
     ca-certificates \  
-    curl \  
-    software-properties-common
+    curl
+apt-get install software-properties-common
 apt-get install -y apt-transport-https ca-certificates gnupg lsb-release
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
  echo \
@@ -21,10 +22,11 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 # make
 apt-get -y install build-essential
 apt-get -y install make
+apt-get install -y sudo
 
 # add nonroot user
-adduser site
-usermode -aG docker,sudo site
+sudo adduser site
+sudo usermode -aG docker,sudo site
 
 # install docker compose
 curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
@@ -33,7 +35,7 @@ chmod +x /usr/local/bin/docker-compose
 # export site domain
 export DOMAIN="beren.io"
 # copy nginx config to correct place
-cp nginx_site_conf ~/docker-data/nginx/conf.d/site.conf
+cp nginx_site.conf ~/docker-data/nginx/conf.d/site.conf
 
 # start containers
 docker-compose up -d
