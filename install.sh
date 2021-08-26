@@ -66,9 +66,10 @@ docker-compose up -d
 # pull down the github repo (requires you to enter your credentials)
 git clone https://github.com/BerenMillidge/BerenMillidge.github.io
 # install dependencies
-cd BerenMillidge.gihub.io
+cd BerenMillidge.github.io
 bundle install --path vendor/bundle
 
 # then update to run
 cd
-bash ./update_site.sh
+cd blog_deployment
+bash update_site.sh

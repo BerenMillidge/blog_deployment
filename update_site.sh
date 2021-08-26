@@ -5,6 +5,7 @@
 # this requires you to enter your gh credentials
 cd BerenMillidge.github.io
 git pull -r
+bundle update --bundler
 # make file
 #make -C ~/blog_deployment/BerenMillidge.github.io/../ deploy
 # build jekyll
