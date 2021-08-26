@@ -25,6 +25,7 @@ apt-get -y install make
 # install ruby stuff for jekyll
 apt-get -y install ruby-dev
 apt-get -y install libz-dev
+apt-get -y install ruby-bundler
 # install jeykll
 gem update --system
 gem install bundle nokogiri jekyll
@@ -56,7 +57,7 @@ mkdir -p ~/docker-data/certbot/www:/var/www/certbot
 # start containers
 docker-compose up -d
 # request ssl certificate
-docker exec -it certbot certbot certonly --renew-by-default
+#docker exec -it certbot certbot certonly --renew-by-default
 
 # restart containers
 docker-compose down
@@ -69,4 +70,5 @@ cd BerenMillidge.gihub.io
 bundle install --path vendor/bundle
 
 # then update to run
+cd
 bash ./update_site.sh
