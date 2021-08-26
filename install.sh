@@ -42,6 +42,16 @@ export DOMAIN="beren.io"
 # copy nginx config to correct place
 sudo mkdir -p ~/docker-data/nginx/conf.d/site.conf
 cp nginx_site.conf ~/docker-data/nginx/conf.d/site.conf
+# ensure all volumes are created
+mkdir -p ~/docker-data/nginx/conf.d/:/etc/nginx/conf.d:ro
+mkdir -p ~/docker-data/nginx/logs:/var/log/nginx
+mkdir -p ~/docker-data/nginx/ssl:/ssl:ro
+mkdir -p ~/docker-data/nginx/site:/site:ro
+mkdir -p ~/docker-data/certbot/conf:/etc/letsencrypt
+mkdir -p ~/docker-data/certbot/www:/var/www/certbot
+
+mkdir -p ~/docker-data/certbot/conf:/etc/letsencrypt
+mkdir -p ~/docker-data/certbot/www:/var/www/certbot
 
 # start containers
 docker-compose up -d
