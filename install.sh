@@ -22,6 +22,12 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 # make
 apt-get -y install build-essential
 apt-get -y install make
+# install ruby stuff for jekyll
+apt-get -y install ruby-dev
+apt-get -y install libz-dev
+# install jeykll
+gem update --system
+gem install bundle nokogiri jekyll
 
 # add nonroot user
 sudo adduser site
@@ -34,6 +40,7 @@ chmod +x /usr/local/bin/docker-compose
 # export site domain
 export DOMAIN="beren.io"
 # copy nginx config to correct place
+sudo mkdir -p ~/docker-data/nginx/conf.d/site.conf
 cp nginx_site.conf ~/docker-data/nginx/conf.d/site.conf
 
 # start containers
@@ -47,6 +54,9 @@ docker-compose up -d
 
 # pull down the github repo (requires you to enter your credentials)
 git clone https://github.com/BerenMillidge/BerenMillidge.github.io
+# install dependencies
+cd BerenMillidge.gihub.io
+bundle install --path vendor/bundle
 
 # then update to run
 bash ./update_site.sh
